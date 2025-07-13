@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+SCREENSHOTS_DIR="/home/$USER/Pictures/Screenshots"
+FILENAME="$(date +%s).png"
+
+if [ ! -d "$SCREENSHOTS_DIR" ]; then
+  mkdir -p "$SCREENSHOTS_DIR"
+fi
+
+take_screenshot() {
+  local mode="$1"
+  local filepath="$SCREENSHOTS_DIR/$FILENAME"
+
+  case $mode in
+    fullscreen)
+      maim | tee "$filepath" | xclip -selection clipboard -t image/png
+      ;;
+    select)
+      maim --select | tee "$filepath" | xclip -selection clipboard -t image/png
+      ;;
+    window)
+      maim -i "$(xdotool getactivewindow)" | tee "$filepath" | xclip -selection clipboard -t image/png
+      ;;
+  esac
+}
+
+take_screenshot "$1"

@@ -207,9 +207,11 @@ exec --no-startup-id picom
 exec --no-startup-id polybar -r
 
 # Screenshots
-bindsym Print exec screenshot fullscreen
-bindsym Ctrl+Print exec screenshot select
-bindsym Ctrl+Shift+Print exec screenshot window
+set $screenshot_script_path ~/.local/bin/screenshot
+
+bindsym Print exec $screenshot_script_path fullscreen
+bindsym Ctrl+Print exec $screenshot_script_path select
+bindsym Ctrl+Shift+Print exec $screenshot_script_path window
 
 # Wallpaper selector
 bindsym $mod+Shift+w exec ~/.config/custom_scripts/wallpaper_select.sh

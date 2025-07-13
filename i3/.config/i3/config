@@ -202,9 +202,12 @@ gaps outer 15
 # gaps bottom 40
 
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpaper.png
+
 exec --no-startup-id picom
 
 exec --no-startup-id polybar -r
+
+exec --no-startup-id dunst
 
 # Screenshots
 set $screenshot_script_path ~/.local/bin/screenshot

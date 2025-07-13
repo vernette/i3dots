@@ -10,18 +10,33 @@ fi
 take_screenshot() {
   local mode="$1"
   local filepath="$SCREENSHOTS_DIR/$FILENAME"
+  local tmpfile maim_cmd
 
   case $mode in
     fullscreen)
-      maim | tee "$filepath" | xclip -selection clipboard -t image/png
+      maim_cmd="maim"
       ;;
     select)
-      maim --select | tee "$filepath" | xclip -selection clipboard -t image/png
+      maim_cmd="maim --select"
       ;;
     window)
-      maim -i "$(xdotool getactivewindow)" | tee "$filepath" | xclip -selection clipboard -t image/png
+      maim_cmd="maim -i \"\$(xdotool getactivewindow)\""
+      ;;
+    *)
+      echo "Usage: $0 {fullscreen|select|window}"
+      return 1
       ;;
   esac
+
+  tmpfile=$(mktemp)
+  eval "$maim_cmd" >"$tmpfile"
+
+  if [ -s "$tmpfile" ]; then
+    cp "$tmpfile" "$filepath"
+    xclip -selection clipboard -t image/png <"$tmpfile"
+  fi
+
+  rm -f "$tmpfile"
 }
 
 take_screenshot "$1"

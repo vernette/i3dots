@@ -1,0 +1,14 @@
+@theme "Paper"
+
+configuration {
+  font: "JetBrainsMono Nerd Font 16";
+  display-p: "Power Menu";
+}
+
+window {
+  width: 10em;
+}
+
+listview {
+  lines: 5;
+}

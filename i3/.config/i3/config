@@ -217,7 +217,7 @@ bindsym Ctrl+Shift+Print exec $screenshot_script_path window
 bindsym $mod+Shift+w exec ~/.config/custom_scripts/wallpaper_select.sh
 
 # Powermenu
-bindsym $mod+Shift+l exec ~/.local/bin/powermenu
+bindsym $mod+Shift+l exec --no-startup-id rofi -show p -modi p:$HOME/.local/bin/rofi-power-menu -theme ~/.config/rofi/power-menu.rasi
 
 # Assign applications to workspaces
 assign [class="LibreWolf"] $ws2
